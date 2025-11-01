@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ЦБ против Big Tech - 5 минут</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: #1e3c72;
+            overflow: hidden;
+            margin: 0;
+            padding: 0;
+        }
+
+        .presentation {
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+
+        .slide {
+            display: none;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            padding: 60px 100px;
+            position: absolute;
+            top: 0;
+            left: 0;
+            animation: slideIn 0.5s ease;
+            overflow-y: auto;
+            box-sizing: border-box;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        h1 {
+            font-size: 52px;
+            color: #1e3c72;
+            margin-top: 80px;
+            margin-bottom: 30px;
+            text-align: center;
+            line-height: 1.3;
+        }
+
+        h2 {
+            font-size: 48px;
+            color: #2a5298;
+            margin-bottom: 35px;
+            border-bottom: 5px solid #2a5298;
+            padding-bottom: 15px;
+        }
+
+        h3 {
+            font-size: 32px;
+            color: #e74c3c;
+            margin: 25px 0 15px 0;
+        }
+
+        li {
+            font-size: 26px;
+            line-height: 1.7;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        p  {
+            font-size: 26px;
+            line-height: 1.7;
+            color: #FFFFFF;
+            margin-bottom: 15px;
+        }
+
+        .subtitle {
+            font-size: 32px;
+            color: #7f8c8d;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .slide-number {
+            position: absolute;
+            bottom: 30px;
+            right: 40px;
+            font-size: 22px;
+            color: #95a5a6;
+            z-index: 10;
+        }
+
+        .controls {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+            z-index: 9999;
+        }
+
+        button {
+            background: white;
+            border: none;
+            padding: 15px 35px;
+            font-size: 18px;
+            border-radius: 50px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: all 0.3s;
+            font-weight: bold;
+            color: #1e3c72;
+            z-index: 9999;
+            position: relative;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+            background: #2a5298;
+            color: white;
+        }
+
+        button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .title-slide {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 80px;
+        }
+
+        .title-slide h1 {
+            color: white;
+            font-size: 58px;
+        }
+
+        .title-slide .subtitle {
+            color: rgba(255,255,255,0.95);
+            font-size: 28px;
+        }
+
+        .vs-icon {
+            font-size: 90px;
+            margin: 70px 0;
+            margin-bottom: 30px;
+        }
+
+        .graph-container {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 30px 0;
+            text-align: center;
+        }
+
+        .stat-large {
+            font-size: 72px;
+            font-weight: bold;
+            color: #e74c3c;
+            margin: 20px 0;
+        }
+
+        .caption {
+            font-size: 22px;
+            color: #7f8c8d;
+            font-style: italic;
+            margin-top: 10px;
+        }
+
+        .timeline {
+            margin: 30px 0;
+        }
+
+        .timeline-item {
+            background: #f8f9fa;
+            padding: 20px 30px;
+            margin: 15px 0;
+            border-left: 6px solid #2a5298;
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+
+        .timeline-item:hover {
+            background: #e8f4f8;
+            transform: translateX(10px);
+        }
+
+        .timeline-item strong {
+            color: #e74c3c;
+            font-size: 28px;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 35px;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
+        .highlight-box h3 {
+            color: white;
+            font-size: 36px;
+            margin-bottom: 15px;
+        }
+
+        .highlight-box p {
+            color: white;
+            font-size: 26px;
+        }
+
+        .comparison-table {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+
+        .comparison-box {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 12px;
+            border-top: 5px solid;
+        }
+
+        .comparison-box.cbdc {
+            border-top-color: #3498db;
+        }
+
+        .comparison-box.libra {
+            border-top-color: #e74c3c;
+        }
+
+        .comparison-box h3 {
+            margin-top: 0;
+            font-size: 34px;
+        }
+
+        .source {
+            position: absolute;
+            bottom: -190px;
+            left: 100px;
+            font-size: 16px;
+            color: #95a5a6;
+            font-style: italic;
+        }
+
+        @media print {
+            .controls { display: none; }
+            .slide { 
+                page-break-after: always;
+                display: block !important;
+                height: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="presentation">
+        <!-- Слайд 1: Титульный -->
+        <div class="slide active title-slide">
+            <h1>Центробанки против Big Tech:<br>кто выиграет битву за будущее денег?</h1>
+            <div class="vs-icon">⚔️</div>
+            <p class="subtitle">Почему провал Libra стал триггером революции CBDC</p>
+            
+            <div style="position: absolute; bottom: 160px; right: 60px; text-align: right; font-size: 12px; color: rgba(255,255,255); line-height: 1.4;">
+                <p style="margin: 0;"><strong>Подготовила:</strong> Кочубей Карина Денисовна,</p>
+                <p style="margin: 0;">студентка 4 группы 3 курса ФФ</p>
+                <p style="margin: 8px 0 0 0;"><strong>Преподаватель:</strong> к. э. н. Баталов Александр Геннадьевич</p>
+            </div>
+            
+            <p style="position: absolute; bottom: 90px; left: 50%; transform: translateX(-50%); font-size: 18px; color: rgba(255,255,255,0.5); margin: 0;">
+                Аналитический доклад | 2025
+            </p>
+            
+        </div>
+
+        <!-- Слайд 2: Ключевой график + Главный тезис -->
+        <div class="slide">
+            <h2>📊 Главный тезис</h2>
+            
+            <div class="highlight-box" style="margin-bottom: 40px;">
+                <h3>💡 Провал Libra стал катализатором</h3>
+                <p>Количество стран, разрабатывающих CBDC, выросло с 35 до 130 за 4 года</p>
+            </div>
+
+            <div class="graph-container">
+                <h3 style="color: #2a5298; margin-bottom: 25px;">Динамика разработки CBDC (2019-2024)</h3>
+                
+                <div style="display: flex; justify-content: space-around; align-items: flex-end; margin: 40px 0;">
+                    <div style="text-align: center;">
+                        <div style="background: #e74c3c; width: 80px; height: 140px; margin: 0 auto; border-radius: 8px 8px 0 0;"></div>
+                        <li style="margin-top: 10px; font-weight: bold;">2019</li>
+                        <p style="font-size: 32px; color: #e74c3c;">35</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: #e67e22; width: 80px; height: 240px; margin: 0 auto; border-radius: 8px 8px 0 0;"></div>
+                        <li style="margin-top: 10px; font-weight: bold;">2020</li>
+                        <p style="font-size: 32px; color: #e67e22;">60</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: #f39c12; width: 80px; height: 350px; margin: 0 auto; border-radius: 8px 8px 0 0;"></div>
+                        <li style="margin-top: 10px; font-weight: bold;">2022</li>
+                        <p style="font-size: 32px; color: #f39c12;">105</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="background: #27ae60; width: 80px; height: 420px; margin: 0 auto; border-radius: 8px 8px 0 0;"></div>
+                        <li style="margin-top: 10px; font-weight: bold;">2024</li>
+                        <p style="font-size: 32px; color: #27ae60;">130+</p>
+                    </div>
+                </div>
+
+                <div style="margin-top: 30px; padding: 20px; background: #fff3cd; border-radius: 8px; border-left: 5px solid #f39c12;">
+                    <p style="margin: 0; color: #856404; font-size: 22px;">
+                        ⚡ <strong>Июнь 2019:</strong> Анонс Libra → резкий рост интереса центробанков к CBDC
+                    </p>
+                </div>
+            </div>
+
+            <p class="source">Источник: Atlantic Council CBDC Tracker, 2024</p>
+    
+        </div>
+
+        <!-- Слайд 3: Второй график - доказательство -->
+        <div class="slide">
+            <h2>📈 Доказательство: параллельный рост</h2>
+
+            <div class="comparison-table">
+                <div class="comparison-box cbdc">
+                    <h3>Страны с CBDC (пилот/запуск)</h3>
+                    <div style="margin: 30px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <span style="font-size: 28px; font-weight: bold;">2019:</span>
+                            <span style="font-size: 36px; color: #3498db; font-weight: bold;">5</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-size: 28px; font-weight: bold;">2024:</span>
+                            <span style="font-size: 36px; color: #27ae60; font-weight: bold;">64</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 22px; color: #7f8c8d; margin-top: 20px;">
+                        Рост в <strong style="color: #27ae60;">12.8 раз</strong>
+                    </p>
+                </div>
+
+                <div class="comparison-box libra">
+                    <h3>Капитализация стейблкоинов</h3>
+                    <div style="margin: 30px 0;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 20px;">
+                            <span style="font-size: 28px; font-weight: bold;">2019:</span>
+                            <span style="font-size: 36px; color: #e74c3c; font-weight: bold;">$5 млрд</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between;">
+                            <span style="font-size: 28px; font-weight: bold;">2024:</span>
+                            <span style="font-size: 36px; color: #c0392b; font-weight: bold;">$150+ млрд</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 22px; color: #7f8c8d; margin-top: 20px;">
+                        Рост в <strong style="color: #c0392b;">30 раз</strong>
+                    </p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h3>💡 Ключевой инсайт</h3>
+                <p>Рынок показал спрос на цифровые деньги ($150 млрд). Центробанки поняли: если не мы, то Big Tech. И запустили ответную гонку.</p>
+            </div>
+
+            <p class="source">Источники: Atlantic Council, CoinGecko, 2024</p>
+        </div>
+
+        <!-- Слайд 4: Вывод и прогноз -->
+        <div class="slide">
+            <h2>🎯 Выводы</h2>
+
+            <div class="timeline">
+                <div class="timeline-item">
+                    <li><strong>1.</strong> Big Tech проиграли битву за глобальную валюту</li>
+                    <p style="font-size: 22px; color: #7f8c8d; margin-left: 35px;">Libra/Diem закрыт в 2022 под давлением регуляторов</p>
+                </div>
+
+                <div class="timeline-item">
+                    <li><strong>2.</strong> Но выиграли войну за цифровизацию денег</li>
+                    <p style="font-size: 22px; color: #7f8c8d; margin-left: 35px;">Пробудили спящих центробанков и ускорили революцию</p>
+                </div>
+
+                <div class="timeline-item">
+                    <li><strong>3.</strong> CBDC — это ответ государств на угрозу</li>
+                    <p style="font-size: 22px; color: #7f8c8d; margin-left: 35px;">Монетарный суверенитет важнее технологических инноваций</p>
+                </div>
+            </div>
+
+            <div class="highlight-box" style="margin-top: 40px;">
+                <h3>🔮 Прогноз к 2030 году</h3>
+                <p style="font-size: 28px; line-height: 1.6;">
+                    <strong>Гибридная модель:</strong> CBDC станут стандартом (государственная инфраструктура), 
+                    но Meta, Apple, Google будут их распространять через свои экосистемы 
+                    <span style="display: block; margin-top: 15px; font-size: 24px; opacity: 0.9;">
+                        → Технология государства + удобство корпораций
+                    </span>
+                </p>
+            </div>
+
+            <p style="text-align: center; font-size: 32px; font-weight: bold; color: #2a5298; margin-top: 10px;">
+                Спасибо за внимание! 🚀
+            </p>
+
+        </div>
+
+    </div>
+
+    <div class="controls">
+        <button id="prevBtn" onclick="changeSlide(-1)">← Назад</button>
+        <button id="nextBtn" onclick="changeSlide(1)">Вперёд →</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const totalSlides = slides.length;
+
+        function showSlide(n) {
+            slides[currentSlide].classList.remove('active');
+            currentSlide = (n + totalSlides) % totalSlides;
+            slides[currentSlide].classList.add('active');
+            
+            document.getElementById('prevBtn').disabled = currentSlide === 0;
+            document.getElementById('nextBtn').disabled = currentSlide === totalSlides - 1;
+        }
+
+        function changeSlide(direction) {
+            showSlide(currentSlide + direction);
+        }
+
+        // Управление клавиатурой
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowLeft') changeSlide(-1);
+            if (e.key === 'ArrowRight') changeSlide(1);
+        });
+
+        // Инициализация
+        document.getElementById('prevBtn').disabled = true;
+    </script>
+</body>
+</html>
